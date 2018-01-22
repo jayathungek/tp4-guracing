@@ -5,10 +5,13 @@ int x_key = A1;
 int y_key = A0;                                               
 int x_pos;
 int y_pos;
-int servo1_pin = 8;
-int servo2_pin = 9;  
 int initial_position = 90;
 int initial_position1 = 90;
+int buttonState = 0;
+
+const int servo1_pin = 8;
+const int servo2_pin = 9;  
+const int buttonPin = 7;
 
 void setup ( ) {
   Serial.begin (9600) ;
@@ -17,11 +20,26 @@ void setup ( ) {
   servo1.write (initial_position);
   servo2.write (initial_position1);
   pinMode (x_key, INPUT);                     
-  pinMode (y_key, INPUT);     
+  pinMode (y_key, INPUT);
+  pinMode(buttonPin, INPUT);     
   pinMode (LED_BUILTIN, OUTPUT);                 
 }
 
 void loop() {
+  buttonState = digitalRead(buttonPin);
+
+  if(buttonState == HIGH) {
+    initial_position = 0;
+    servo1.write(initial_position);
+    delay(100);
+    initial_position1 = 0;
+    servo2.write(initial_position1);
+    delay(100);
+    digitalWrite(LED_BUILTIN, HIGH);
+  } else {
+    digitalWrite(LED_BUILTIN, LOW);
+  }
+  
   x_pos = analogRead(x_key);
   y_pos = analogRead(y_key);
 
@@ -69,9 +87,7 @@ void loop() {
   Serial.println(initial_position);
   Serial.print(" | initial position y");
   Serial.println(initial_position1);
-  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
-  delay(100);                       // wait for a second
-  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
-  delay(100);
+  Serial.print(" | Button State");
+  Serial.println(buttonState); 
 }
 
