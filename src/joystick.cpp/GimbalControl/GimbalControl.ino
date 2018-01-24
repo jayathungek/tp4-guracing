@@ -13,7 +13,7 @@ const int servo1_pin = 8;
 const int servo2_pin = 9;  
 const int buttonPin = 7;
 
-void setup ( ) {
+void setup() {
   Serial.begin (9600) ;
   servo1.attach (servo1_pin ); 
   servo2.attach (servo2_pin ) ; 
@@ -29,10 +29,10 @@ void loop() {
   buttonState = digitalRead(buttonPin);
 
   if(buttonState == HIGH) {
-    initial_position = 0;
+    initial_position = 90;
     servo1.write(initial_position);
     delay(100);
-    initial_position1 = 0;
+    initial_position1 = 90;
     servo2.write(initial_position1);
     delay(100);
     digitalWrite(LED_BUILTIN, HIGH);
@@ -79,7 +79,7 @@ void loop() {
     }
   }
 
-  Serial.print("X: ");
+  /*Serial.print("X: ");
   Serial.print(x_pos);
   Serial.print(" | Y: ");
   Serial.print(y_pos);
@@ -87,6 +87,7 @@ void loop() {
   Serial.println(initial_position);
   Serial.print(" | initial position y");
   Serial.println(initial_position1);
+  */
   Serial.print(" | Button State");
   Serial.println(buttonState); 
 }
