@@ -26,7 +26,7 @@ void setup() {
 }
 
 void loop() {
-  buttonState = digitalRead(buttonPin);
+  /*buttonState = digitalRead(buttonPin);
 
   if(buttonState == HIGH) {
     initial_position = 90;
@@ -39,7 +39,7 @@ void loop() {
   } else {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  
+  */
   x_pos = analogRead(x_key);
   y_pos = analogRead(y_key);
 
@@ -79,16 +79,15 @@ void loop() {
     }
   }
 
-  /*Serial.print("X: ");
-  Serial.print(x_pos);
-  Serial.print(" | Y: ");
-  Serial.print(y_pos);
-  Serial.print(" | initial position x: ");
-  Serial.println(initial_position);
-  Serial.print(" | initial position y");
-  Serial.println(initial_position1);
-  */
-  Serial.print(" | Button State");
-  Serial.println(buttonState); 
+  Serial.print("X: ");
+  Serial.println(x_pos);
+  Serial.print("Y: ");
+  Serial.println(y_pos);
+  //Serial.print(" | initial position x: ");
+  //Serial.println(initial_position);
+  //Serial.print(" | initial position y: ");
+  //Serial.print(initial_position1);
+  //Serial.print(" | Button State");
+  //Serial.println(buttonState); 
 }
 
