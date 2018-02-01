@@ -8,6 +8,8 @@ int y_pos;
 int initial_position = 90;
 int initial_position1 = 90;
 int buttonState = 0;
+int step = 10;
+int delayValue = 500; // in ms
 
 const int servo1_pin = 8;
 const int servo2_pin = 9;  
@@ -26,7 +28,7 @@ void setup() {
 }
 
 void loop() {
-  /*buttonState = digitalRead(buttonPin);
+  buttonState = digitalRead(buttonPin);
 
   if(buttonState == HIGH) {
     initial_position = 90;
@@ -39,55 +41,56 @@ void loop() {
   } else {
     digitalWrite(LED_BUILTIN, LOW);
   }
-  */
+ 
   x_pos = analogRead(x_key);
   y_pos = analogRead(y_key);
 
   if(x_pos < 300){
     if (initial_position < 10) {}
     else {
-      initial_position = initial_position - 20;
+      initial_position = initial_position - step;
       servo1.write(initial_position);
-      delay(100);
+      delay(delayValue);
     }
   }
 
   if(x_pos > 700){
     if(initial_position > 180) {}
     else {
-      initial_position = initial_position + 20;
+      initial_position = initial_position + step;
       servo1.write(initial_position);
-      delay(100);
+      delay(delayValue);
     }
   }
 
   if(y_pos < 300){
     if (initial_position1 < 10) {}
     else {
-      initial_position1 = initial_position1 - 20;
+      initial_position1 = initial_position1 - step;
       servo2.write(initial_position1);
-      delay(100);
+      delay(delayValue);
     }
   }
 
   if(y_pos > 700){
     if(initial_position > 180) {}
     else {
-      initial_position1 = initial_position1 + 20;
+      initial_position1 = initial_position1 + step;
       servo2.write(initial_position1);
-      delay(100);
+      delay(delayValue);
     }
   }
 
-  Serial.print("X: ");
-  Serial.println(x_pos);
-  Serial.print("Y: ");
-  Serial.println(y_pos);
+  //Serial.print("X: ");
+  //Serial.println(x_pos);
+  //Serial.print("Y: ");
+  //Serial.println(y_pos);
   //Serial.print(" | initial position x: ");
   //Serial.println(initial_position);
   //Serial.print(" | initial position y: ");
   //Serial.print(initial_position1);
-  //Serial.print(" | Button State");
-  //Serial.println(buttonState); 
+  Serial.print(" | Button State");
+  Serial.println(buttonState); 
+  
 }
 
