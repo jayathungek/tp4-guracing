@@ -40,7 +40,7 @@ const float coef = 0.039;
 
 const byte HC12RxdPin = 8;                  // Recieve Pin on HC12
 const byte HC12TxdPin = 9;                  // Transmit Pin on HC12
-
+const byte HC12SetPin = 10;
 SoftwareSerial HC12(HC12TxdPin,HC12RxdPin); // Create Software Serial Port
 
 
@@ -54,9 +54,21 @@ void setup() {
   
   // Debugging
   Serial.begin(9600);
+
+  pinMode(HC12SetPin, OUTPUT);
+  digitalWrite(HC12SetPin, LOW);
+  delay(1000);
+  HC12.write("AT+B1200");
+  delay(1000);
 }
 
 void loop() {
+  if (HC12.available()){
+    Serial.write(HC12.read());
+  }
+  if (Serial.available()){
+    HC12.write(Serial.read());
+  }
   // deal with pan
   a_in_x = analogRead(joy_x); // reading joy_x range 0 and 1023
   
